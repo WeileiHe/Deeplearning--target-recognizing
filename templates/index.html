@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Detection</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            margin: auto;
+            max-width: 500px;
+            padding: 10px;
+        }
+        h1 {
+            color:#333;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+       
+        
+        button {
+            position: fixed;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 15px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, button:focus {
+            background-color: #0056b3;
+            outline: none;
+        }
+        @media (max-width: 1000px) {
+            .container {
+                width: 100%;
+            }
+        }
+        #preview {
+            max-width: 100%;
+            margin-top: 20px;
+            min-width: 200px;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Detection</h1>
+        <form action="/detect" method="post" enctype="multipart/form-data">
+            <input type="file" id="image" name="image" accept="image/*" required onchange="loadFile(event)">
+            <input type="hidden" id="image_id" name="image_id">
+            <img id="preview">
+            <button type="submit">Detect</button>
+        </form>
+    </div>
+
+    <script>
+        function loadFile(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+
+            var image_id = event.target.files[0].name.split('.')[0];
+            document.getElementById('image_id').value = image_id;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Display</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+        }
+        #image-display {
+            max-width: 100%;
+            height: auto;
+            max-width: 800px;
+            max-height: 800px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size:xx-large;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Image and Result Display</h2>
+    <img id="image-display" src="{{ url_for('static',filename='Samples/' + image_id + '.jpg') }}" alt="image">
+    <div id="result">
+        <p>RESULT: {{ result|safe }}</p>
+    </div>
+</body>
+</html>
