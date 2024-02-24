@@ -1,0 +1,107 @@
+# YOLOv5 🚀 by Ultralytics, AGPL-3.0 license
+# COCO 2017 dataset http://cocodataset.org by Microsoft
+# Example usage: python train.py --data coco.yaml
+# parent
+# ├── yolov5
+# └── datasets
+#     └── coco  ← downloads here (20.1 GB)
+
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) 
+
+train: data/2019_train.txt # train images (relative to 'path') 118287 images
+val: data/2019_val.txt  # val images (relative to 'path') 5000 images
+test: data/2019_test.txt  # 20288 of 40670 images, submit tohttps://competitions.codalab.org/competitions/20794
+# Classes
+names:
+    0: plate
+    1: 0
+    2: 1
+    3: 2
+    4: 3
+    5: 4
+    6: 5
+    7: 6
+    8: 7
+    9: 8
+    10: 9
+    11: A
+    12: B
+    13: C
+    14: D
+    15: E
+    16: F
+    17: G
+    18: H
+    19: J
+    20: K
+    21: L
+    22: M
+    23: N
+    24: P
+    25: Q
+    26: R
+    27: S
+    28: T
+    29: U
+    30: V
+    31: W
+    32: X
+    33: Y
+    34: Z
+    35: 澳
+    36: 川
+    37: 鄂
+    38: 甘
+    39: 赣
+    40: 港
+    41: 贵
+    42: 桂
+    43: 黑
+    44: 沪
+    45: 吉
+    46: 冀
+    47: 津
+    48: 晋
+    49: 京
+    50: 警
+    51: 辽
+    52: 鲁
+    53: 蒙
+    54: 闽
+    55: 宁
+    56: 青
+    57: 琼
+    58: 陕
+    59: 苏
+    60: 皖
+    61: 湘
+    62: 新
+    63: 学
+    64: 渝
+    65: 豫
+    66: 粤
+    67: 云
+    68: 浙
+    69: 藏
+  
+
+
+# Download script/URL (optional)
+download: |
+  from utils.general import download, Path
+
+
+  # Download labels
+  segments = False  # segment or box labels
+  dir = Path(yaml['path'])  # dataset root dir
+  url = 'https://github.com/ultralytics/yolov5/releases/download/v1.0/'
+  urls = [url + ('coco2017labels-segments.zip' if segments else 'coco2017labels.zip')]  # labels
+  download(urls, dir=dir.parent)
+
+  # Download data
+  urls = ['http://images.cocodataset.org/zips/train2017.zip',  # 19G, 118k images
+          'http://images.cocodataset.org/zips/val2017.zip',  # 1G, 5k images
+          'http://images.cocodataset.org/zips/test2017.zip']  # 7G, 41k images (optional)
+  download(urls, dir=dir / 'images', threads=3)
+
